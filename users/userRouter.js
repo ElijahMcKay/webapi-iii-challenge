@@ -50,7 +50,7 @@ function validateUserId(req, res, next) {
 
 function validateUser(req, res, next) {
     const body = req.body
-    const name = req.name
+    const name = req.body.name
     if(Object.keys(body).length === 0) {
         res.status(400).json({
             message: 'missing user data'
@@ -64,7 +64,18 @@ function validateUser(req, res, next) {
 };
 
 function validatePost(req, res, next) {
-
+    const body = req.body; 
+    const text = req.body.text; 
+    if(Object.keys(body).length === 0) {
+        res.status(400).json({
+            message: 'missing user data'
+        }) 
+    } else if(Object.keys(text).length === 0) {
+        res.status(400).json({
+            message: 'missing required text field'
+        })         
+    }
+    next(); 
 };
 
 module.exports = router;
